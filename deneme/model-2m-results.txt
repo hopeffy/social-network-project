@@ -1,0 +1,130 @@
+(.venv) root@03db5b3be0ae:/workspace/deneme# python test-model-2m.py
+Using device: cuda
+GAT yapısını eski sürümden uyarlıyorum...
+Model kısmi olarak yüklendi (bazı parametreler varsayılan değerlerle başlatıldı)
+
+Label Distribution:
+label
+0    4681
+1    3516
+Name: count, dtype: int64
+Positive edge rate: 0.4289
+Number of nodes: 1877
+Number of edges: 8197
+/workspace/deneme/models/temporal_gat.py:100: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=self.use_fp16):
+/workspace/deneme/models/temporal_gat.py:143: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=False):
+/workspace/deneme/models/temporal_gat.py:193: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=False):
+/workspace/deneme/models/temporal_gat.py:222: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=self.use_fp16):
+/workspace/deneme/models/temporal_gat.py:235: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=False):
+
+First batch predictions stats:
+Min: -1.357270, Max: 1.315428
+Mean: 0.401890, Std: 0.402541
+
+Predictions distribution:
+Min: -2.245606, Max: 1.315428
+Mean: 0.386226, Std: 0.409878
+
+Histogram of predictions:
+0.0-0.1: 591
+0.1-0.2: 729
+0.2-0.3: 490
+0.3-0.4: 468
+0.4-0.5: 578
+0.5-0.6: 720
+0.6-0.7: 979
+0.7-0.8: 1334
+0.8-0.9: 623
+0.9-1.0: 233
+
+F1 scores with standard thresholds:
+Threshold 0.1: F1 = 0.5483
+Threshold 0.2: F1 = 0.5257
+Threshold 0.3: F1 = 0.5067
+Threshold 0.4: F1 = 0.4873
+Threshold 0.5: F1 = 0.4566
+Threshold 0.6: F1 = 0.4086
+Threshold 0.7: F1 = 0.3290
+Threshold 0.8: F1 = 0.1830
+Threshold 0.9: F1 = 0.0759
+
+============================================================
+DETAILED THRESHOLD ANALYSIS (0.30-0.45 range, 0.05 step)
+============================================================
+Threshold  Accuracy   Precision  Recall     F1-Score   TP       FP       TN       FN      
+------------------------------------------------------------
+0.30       0.4854     0.4303     0.6160     0.5067     2166     2868     1813     1350    
+0.35       0.4894     0.4300     0.5848     0.4956     2056     2725     1956     1460    
+0.40       0.4944     0.4312     0.5600     0.4873     1969     2597     2084     1547    
+0.45       0.4986     0.4309     0.5270     0.4742     1853     2447     2234     1663    
+============================================================
+
+============================================================
+BEST THRESHOLD VALUE: 0.0100
+============================================================
+Accuracy:  0.4431
+Precision: 0.4229
+Recall:    0.8177
+F1-Score:  0.5574
+AUC:       0.4936
+AP:        0.4248
+
+Confusion Matrix:
+True Positive (TP): 2875
+False Positive (FP): 3924
+True Negative (TN): 757
+False Negative (FN): 641
+============================================================
+
+============================================================
+FIXED THRESHOLD VALUE: 0.30
+============================================================
+Accuracy:  0.4854
+Precision: 0.4303
+Recall:    0.6160
+F1-Score:  0.5067
+AUC:       0.4936
+AP:        0.4248
+
+Confusion Matrix:
+True Positive (TP): 2166
+False Positive (FP): 2868
+True Negative (TN): 1813
+False Negative (FN): 1350
+============================================================
+
+============================================================
+SUMMARY TEST RESULTS
+============================================================
+Best Threshold: 0.0100
+Accuracy:  0.4431
+Precision: 0.4229
+Recall:    0.8177
+F1 Score:  0.5574
+AUC:       0.4936
+AP:        0.4248
+/workspace/deneme/test-model-2m.py:386: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  output_df['prediction'] = (output_df['probability'] >= threshold_value).astype(int)
+
+Prediction probabilities saved to 'output_A_2m.csv'.
+Threshold: 0.30
+Total edges predicted: 8197
+Positive predictions: 5034 (61.41%)
+
+Output file preview (first 5 rows):
+30,48382,1.204836 -> Positive
+106,8540,0.619241 -> Positive
+106,8540,0.619241 -> Positive
+106,20816,0.374513 -> Positive
+106,28905,0.574630 -> Positive
+
+Detailed test report saved to: test_reports/test_report_2m_20250519_092927.json
